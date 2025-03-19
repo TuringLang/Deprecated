@@ -4,7 +4,6 @@ using LinearAlgebra
 using BenchmarkTools
 
 using LogDensityProblems
-using LogDensityProblemsAD
 
 using DynamicPPL
 using ADTypes
@@ -25,7 +24,6 @@ end
 
 export benchmark_model, make_turing_suite, BenchmarkTools, @tagged
 
-# Don't include `TrackerAD` because it's never going to win.
 const DEFAULT_ADBACKENDS = [
     AutoForwardDiff(chunksize=0),
     AutoReverseDiff(compile=false),
@@ -41,11 +39,13 @@ end
 backend_label(::AutoZygote) = "Zygote"
 backend_label(::AutoTracker) = "Tracker"
 backend_label(::AutoEnzyme) = "Enzyme"
+backend_label(::AutoMooncake) = "Mooncake"
 
 const SYMBOL_TO_BACKEND = Dict(
     :forwarddiff => AutoForwardDiff(chunksize=0),
     :reversediff => AutoReverseDiff(compile=false),
     :reversediff_compiled => AutoReverseDiff(compile=true),
+    :mooncake => AutoMooncake(; config=nothing),
     :zygote => AutoZygote(),
     :tracker => AutoTracker(),
 )
@@ -173,7 +173,6 @@ function make_turing_suite(
     suite["evaluation"] = suite_evaluation
     suite["gradient"] = suite_gradient
 
-    indexer = sampler === nothing ? Colon() : sampler
     if sampler !== nothing
         context = DynamicPPL.SamplingContext(sampler, context)
     end
@@ -190,11 +189,7 @@ function make_turing_suite(
         # compiles the tape upon `ADgradient` construction, and so we want to
         # check that the compiled tape is also correct on inputs which it wasn't
         # compiled for.
-        varinfo_current = DynamicPPL.unflatten(varinfo, context, varinfo[indexer])
-        f = LogDensityProblemsAD.ADgradient(
-            adbackend,
-            DynamicPPL.LogDensityFunction(varinfo_current, model, context)
-        )
+        f = DynamicPPL.LogDensityFunction(model, varinfo, context; adtype=adbackend)
 
         try
             if run_once || check_grads
@@ -216,14 +211,9 @@ function make_turing_suite(
 
         # Need a separate `VarInfo` for the linked version since otherwise we risk the
         # `varinfo` from above being mutated.
-        varinfo_linked = if sampler === nothing
-            DynamicPPL.link(varinfo_current, model)
-        else
-            DynamicPPL.link(varinfo_current, sampler, model)
-        end
-        f_linked = LogDensityProblemsAD.ADgradient(
-            adbackend,
-            DynamicPPL.LogDensityFunction(varinfo_linked, model, context)
+        varinfo_linked = DynamicPPL.link(varinfo, model)
+        f_linked = DynamicPPL.LogDensityFunction(
+            model, varinfo_linked, context; adtype=adbackend
         )
 
         try
@@ -249,11 +239,7 @@ function make_turing_suite(
     suite_evaluation["standard"] = @benchmarkable $(DynamicPPL.evaluate!!)(
         $model, $varinfo, $context
     )
-    varinfo_linked = if sampler === nothing
-        DynamicPPL.link(varinfo, model)
-    else
-        DynamicPPL.link(varinfo, sampler, model)
-    end
+    varinfo_linked = DynamicPPL.link(varinfo, model)
     suite_evaluation["linked"] = @benchmarkable $(DynamicPPL.evaluate!!)(
         $model, $varinfo_linked, $context
     )
