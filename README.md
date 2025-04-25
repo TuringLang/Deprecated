@@ -2,7 +2,7 @@ This repo contains depreciated utility packages for Turing.jl. These packages ei
 
 Planned depreciations: 
 
-- `AdvancedPS.jl`
-- `TuringBenchmarking.jl`
-- `TuringCallbacks.jl`
-- `ParetoSmooth.jl`
+- [ ] `AdvancedPS.jl`
+- [ ] `TuringBenchmarking.jl`
+- [ ] `TuringCallbacks.jl`
+- [ ] `ParetoSmooth.jl`
