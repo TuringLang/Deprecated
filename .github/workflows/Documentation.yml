@@ -1,0 +1,40 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+    tags: ['*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+    # Skip intermediate builds: always.
+    # Cancel intermediate builds: only if it is a pull request build.
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+permissions:
+    contents: write
+    pull-requests: read
+
+jobs:
+  docs:
+    name: ${{ matrix.pkg.name }} Docs
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg:
+          - name: TuringBenchmarking
+            dir: './TuringBenchmarking'
+    
+    steps:
+      - name: Build and deploy
+        uses: TuringLang/actions/DocsDocumenter@main
+        with:
+          pkg_path: ${{ matrix.pkg.dir }}
+          doc-path: ${{ matrix.pkg.dir }}/docs
+          doc-make-path: ${{ matrix.pkg.dir }}/docs/make.jl
+          doc-build-path: ${{ matrix.pkg.dir }}/docs/build
+          dirname: ${{ matrix.pkg.name }}
