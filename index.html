@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <title>Depreciated Packages - Turing.jl</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body style="height: 100%; margin: 0;">
+
+<div id="main" style="height: 100%;"></div>
+
+<script>
+var myChart = echarts.init(document.getElementById('main'));
+
+var treeData = {
+  name: 'depreciated',
+  itemStyle: { color: '#2196f3' },  // Root node: blue
+  children: [
+    { name: 'TuringBenchmarking.jl', url: 'TuringBenchmarking' },
+    { name: 'AdvancedPS.jl' },
+    { name: 'TuringCallbacks.jl' },
+    { name: 'ParetoSmooth.jl' }
+  ]
+};
+
+treeData.children.forEach(child => {
+  if (child.url) {
+    child.itemStyle = { color: '#4caf50' };
+  } else {
+    child.itemStyle = { color: '#f44336' };
+  }
+});
+
+var option = {
+  tooltip: {
+    trigger: 'item',
+    triggerOn: 'mousemove'
+  },
+  series: [
+    {
+      type: 'tree',
+      data: [treeData],
+      top: '10%',
+      left: '10%',
+      bottom: '10%',
+      right: '10%',
+      orient: 'vertical',
+      symbolSize: 18,
+      initialTreeDepth: -1,
+      label: {
+        position: 'top',
+        verticalAlign: 'middle',
+        align: 'center',
+        fontSize: 16,
+        overflow: 'break',
+        width: 120
+      },
+      leaves: {
+        label: {
+          position: 'bottom',
+          verticalAlign: 'middle',
+          align: 'center',
+          fontSize: 14,
+          overflow: 'break',
+          width: 100
+        }
+      },
+      emphasis: {
+        focus: 'descendant'
+      },
+      expandAndCollapse: true,
+      animationDuration: 500,
+      animationDurationUpdate: 750
+    }
+  ]
+};
+
+myChart.setOption(option);
+
+myChart.on('click', function (params) {
+  if (params.data && params.data.url) {
+    window.open(params.data.url, '_blank');
+  }
+});
+
+window.addEventListener('resize', function() {
+  myChart.resize();
+});
+</script>
+
+</body>
+</html>
