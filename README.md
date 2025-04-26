@@ -134,7 +134,42 @@ git push origin migrate-advancedps
 - Open a Pull Request from your feature branch (e.g., `migrate-advancedps`) into the `main` branch.
 - Get it reviewed and merged.
 
----
+### Step 8: Add all versioned docs
+Once the PR is merged, add all versioned docs from gh-pages branch of original repository to the gh-pages branch of this repository in package folder. 
+
+```bash
+git fetch origin
+git checkout gh-pages
+git pull origin gh-pages
+```
+
+Make sure that your Git is configured to allow symlinks:
+```bash
+git config core.symlinks true
+```
+(This should be set before cloning, but good to double-check.)
+Otherwise symlinks will be cloned as plain text files.
+
+#### Create a temporary folder
+```bash
+mkdir temp-gh-pages
+cd temp-gh-pages
+
+# Clone only the gh-pages branch of original repo
+git clone --branch gh-pages --single-branch --depth 1 <original-repo-url> .
+```
+
+Make sure to add these files and folders to the correct location:
+- All v* folders should be added to the root of the package folder.
+- versions.js should be replaced with versions.js from the original repository.
+- All symlinks should be added to the root of the package folder, make sure that your git have symlinks enabled.
+
+Finally, delete the temporary folder, add, commit the changes and push to the gh-pages branch of depreciated repository:
+```bash
+git add -A
+git commit -m "Add versioned docs for AdvancedPS"
+git push origin gh-pages
+```
 
 ## Notes
 
