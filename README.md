@@ -177,5 +177,3 @@ git push origin gh-pages
 - Tags from the original repository are **not automatically transferred**.  
   If needed, important tags should be manually recreated after migration.
 - Please avoid pushing directly to `main`. Always work via a feature branch and a Pull Request.
-
----
