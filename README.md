@@ -1,6 +1,6 @@
-# Depreciated Utility Packages for Turing.jl
+# Deprecated Utility Packages for Turing.jl
 
-This repository contains *depreciated* utility packages for Turing.jl.  
+This repository contains *deprecated* utility packages for Turing.jl.  
 These packages have either:
 - Been upstreamed into Turing.jl,
 - Been superseded by new features in Turing.jl itself,
@@ -11,7 +11,7 @@ These packages have either:
 | Package | Status | Documentation |
 |:--------|:-------|:---------------|
 | `AdvancedPS.jl` | ⬜ Planned | *(pending)* |
-| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/depreciated/TuringBenchmarking/) |
+| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/deprecated/TuringBenchmarking/) |
 | `TuringCallbacks.jl` | ⬜ Planned | *(pending)* |
 | `ParetoSmooth.jl` | ⬜ Planned | *(pending)* |
 
@@ -22,13 +22,13 @@ The following steps describe how to migrate a standalone package into this repos
 ### Step 1: Clone this repository
 
 ```bash
-git clone https://github.com/TuringLang/depreciated.git
-cd depreciated
+git clone https://github.com/TuringLang/deprecated.git
+cd deprecated
 ```
 
 ### Step 2: Create a new branch
 
-Always create a feature branch for each imported package.
+You can always create a feature branch for each imported package.
 
 ```bash
 git checkout -b migrate-<package-name>
@@ -62,7 +62,7 @@ Example:
 git subtree add --prefix=AdvancedPS advancedps/main
 ```
 
-This will create a new commit automatically, preserving the full commit history inside the subfolder.
+This will automatically create a new commit, preserving the full commit history within the subfolder.
 
 ### Step 5: Check if all registered versions exist
 Before opening a Pull Request, verify that all registered versions of the package are present locally.
@@ -135,7 +135,7 @@ git push origin migrate-advancedps
 - Get it reviewed and merged.
 
 ### Step 8: Add all versioned docs
-Once the PR is merged, add all versioned docs from gh-pages branch of original repository to the gh-pages branch of this repository in package folder. 
+Once the PR is merged, add all versioned docs from the gh-pages branch of the original repository to the gh-pages branch of this repository in the package folder. 
 
 ```bash
 git fetch origin
@@ -148,23 +148,23 @@ Make sure that your Git is configured to allow symlinks:
 git config core.symlinks true
 ```
 (This should be set before cloning, but good to double-check.)
-Otherwise symlinks will be cloned as plain text files.
+Otherwise, symlinks will be cloned as plain text files.
 
 #### Create a temporary folder
 ```bash
 mkdir temp-gh-pages
 cd temp-gh-pages
 
-# Clone only the gh-pages branch of original repo
+# Clone only the gh-pages branch of the original repo
 git clone --branch gh-pages --single-branch --depth 1 <original-repo-url> .
 ```
 
 Make sure to add these files and folders to the correct location:
 - All v* folders should be added to the root of the package folder.
 - versions.js should be replaced with versions.js from the original repository.
-- All symlinks should be added to the root of the package folder, make sure that your git have symlinks enabled.
+- All symlinks should be added to the root of the package folder. Ensure that your Git has symlinks enabled.
 
-Finally, delete the temporary folder, add, commit the changes and push to the gh-pages branch of depreciated repository:
+Finally, delete the temporary folder, add, commit the changes and push to the gh-pages branch of the deprecated repository:
 ```bash
 git add -A
 git commit -m "Add versioned docs for AdvancedPS"
