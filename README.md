@@ -15,6 +15,8 @@ These packages have either:
 | `TuringCallbacks.jl` | ⬜ Planned | *(pending)* |
 | `ParetoSmooth.jl` | ⬜ Planned | *(pending)* |
 
+In addition, we would like to deprecate `DistributionsAD.jl` when `Mooncake` / `Enzyme` replaces `ReverseDiff` and `ForwardDiff`. 
+
 ## Guide: Adding Packages While Preserving Commit History
 
 The following steps describe how to migrate a standalone package into this repository while preserving its full Git history, using `git subtree`.
