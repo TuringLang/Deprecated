@@ -11,7 +11,7 @@ These packages have either:
 | Package | Status | Documentation |
 |:--------|:-------|:---------------|
 | `AdvancedPS.jl` | ⬜ Planned | *(pending)* |
-| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/deprecated/TuringBenchmarking/) |
+| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringBenchmarking/) |
 | `TuringCallbacks.jl` | ⬜ Planned | *(pending)* |
 | `ParetoSmooth.jl` | ⬜ Planned | *(pending)* |
 
@@ -179,3 +179,109 @@ git push origin gh-pages
 - Tags from the original repository are **not automatically transferred**.  
   If needed, important tags should be manually recreated after migration.
 - Please avoid pushing directly to `main`. Always work via a feature branch and a Pull Request.
+
+## Redirect links of deprecated package to correct location
+
+Follow these steps to add HTML redirects for deprecated documentation such as `TuringBenchmarking.jl` to the `turinglang.github.io` repo's `gh-pages` branch.
+
+#### 1. Checkout `gh-pages` branch of `turinglang.github.io`
+
+```bash
+git checkout gh-pages
+git pull origin gh-pages
+```
+
+#### 2. Save and run the redirect script
+
+Save the following script as `redirects.sh` and update the `Config` in it:
+
+```bash
+#!/bin/bash
+
+# === Config ===
+SRC_REPO="https://github.com/TuringLang/TuringBenchmarking.jl.git"
+SRC_BRANCH="gh-pages"
+SRC_TMP_DIR="tmp_TuringBenchmarking"
+DEST_PREFIX="/Deprecated/TuringBenchmarking"
+DEST_BASE_DIR="TuringBenchmarking.jl"
+
+# === Clean previous temp clone ===
+rm -rf "$SRC_TMP_DIR"
+git clone --branch "$SRC_BRANCH" --depth 1 "$SRC_REPO" "$SRC_TMP_DIR"
+
+cd "$SRC_TMP_DIR" || exit 1
+
+# === Match dev, stable, v*, and symlinks ===
+MATCHED_DIRS=$(
+  find . -maxdepth 1 \( -type d -o -type l \) \
+  ! -name "." \
+  -exec bash -c '
+    for d; do
+      base=$(basename "$d")
+      [[ "$base" == "dev" || "$base" == "stable" || "$base" == v* ]] && echo "$base"
+    done
+  ' _ {} +
+)
+
+cd ..
+
+# === Create minimal redirect folders ===
+mkdir -p "$DEST_BASE_DIR"
+for path in $MATCHED_DIRS; do
+  dest_dir="${DEST_BASE_DIR}/${path}"
+  mkdir -p "$dest_dir"
+  cat > "${dest_dir}/index.html" <<EOF
+<meta http-equiv="refresh" content="0; url=${DEST_PREFIX}/${path}/" />
+EOF
+  echo "✅ Created redirect for: $path"
+done
+
+# === Create root redirect to stable ===
+cat > "${DEST_BASE_DIR}/index.html" <<EOF
+<meta http-equiv="refresh" content="0; url=${DEST_PREFIX}/stable/" />
+EOF
+echo "✅ Created root redirect: /TuringBenchmarking.jl/ → /Deprecated/TuringBenchmarking/stable/"
+
+# === Cleanup ===
+rm -rf "$SRC_TMP_DIR"
+echo "🎉 All redirects created in ./$DEST_BASE_DIR/"
+
+# === Self-destruct this script ===
+rm -- "$0"
+```
+
+Then make it executable and run:
+
+```bash
+chmod +x redirects.sh
+./redirects.sh
+```
+
+This creates a `TuringBenchmarking.jl/` folder with minimal `index.html` files to redirect `stable/`, `dev/`, `v*`, and the root URL.
+
+#### 3. Add any manual redirects if needed
+
+If you know of any additional special-case redirects (e.g. `latest/`, `oldstable/`, custom aliases), you can manually create those similarly:
+
+```bash
+mkdir -p TuringBenchmarking.jl/latest
+echo '<meta http-equiv="refresh" content="0; url=/Deprecated/TuringBenchmarking/stable/" />' > TuringBenchmarking.jl/latest/index.html
+```
+
+#### 4. Commit and push the changes
+
+```bash
+git add TuringBenchmarking.jl
+git commit -m "Added redirects for deprecated TuringBenchmarking.jl documentation"
+git push origin gh-pages
+```
+
+---
+
+This ensures **all known URLs** like:
+
+* `https://turinglang.org/TuringBenchmarking.jl/`
+* `.../stable/`
+* `.../dev/`
+* `.../v0.5/`
+  continue working after deprecation, and point cleanly to the new location in `/Deprecated/`.
