@@ -8,14 +8,14 @@ These packages have either:
 
 ## Planned Deprecations
 
-| Package | Status | Documentation |
-|:--------|:-------|:---------------|
-| `AdvancedPS.jl` | ⬜ Planned | *(pending)* |
-| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringBenchmarking/) |
-| `TuringCallbacks.jl` | ⬜ Planned | *(pending)* |
-| `ParetoSmooth.jl` | ⬜ Planned | *(pending)* |
+| Package | Status | Documentation | Prerequisite |
+|:--------|:-------|:---------------|:------|
+| `AdvancedPS.jl` | ⬜ Planned | *(pending)* | Need to upstream AdvancedPS to Turing.jl |
+| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringBenchmarking/) | NIL |
+| `TuringCallbacks.jl` | ⬜ Planned | *(pending)* | Need to upstream callbacks to AbstractMCMC as an extension |
+| `ParetoSmooth.jl` | ⬜ Planned | *(pending)* | https://github.com/TuringLang/Turing.jl/issues/2534 |
+| `DistributionsAD.jl` | ⬜ Planned | *(pending)* |  https://github.com/TuringLang/DistributionsAD.jl/issues/282 |
 
-In addition, we would like to deprecate `DistributionsAD.jl` when `Mooncake` / `Enzyme` replaces `ReverseDiff` and `ForwardDiff`. 
 
 ## Guide: Adding Packages While Preserving Commit History
 
