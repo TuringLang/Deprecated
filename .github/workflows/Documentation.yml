@@ -28,6 +28,8 @@ jobs:
         pkg:
           - name: TuringBenchmarking
             dir: './TuringBenchmarking'
+          - name: TuringCallbacks
+            dir: './TuringCallbacks'
     
     steps:
       - name: Build and deploy
