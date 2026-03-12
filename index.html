@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TuringLang Deprecated Packages</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f1ea;
+      --panel: rgba(255, 255, 255, 0.84);
+      --border: rgba(29, 39, 51, 0.12);
+      --text: #18212c;
+      --muted: #5f6b79;
+      --link: #0f5c4d;
+      --shadow: 0 20px 60px rgba(31, 43, 56, 0.08);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(16, 92, 77, 0.12), transparent 28rem),
+        radial-gradient(circle at bottom right, rgba(196, 132, 73, 0.12), transparent 24rem),
+        var(--bg);
+    }
+
+    main {
+      width: min(960px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 4rem 0;
+    }
+
+    .shell {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.75rem;
+      font-family: "Segoe UI", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--link);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      max-width: 42rem;
+      margin: 1rem 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .table-wrap {
+      padding: 0 1rem 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 1rem 1.1rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: rgba(24, 33, 44, 0.04);
+      font-family: "Segoe UI", sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td:first-child {
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.16em;
+    }
+
+    a:hover {
+      text-decoration-thickness: 0.12em;
+    }
+
+    .mono {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.94rem;
+      word-break: break-word;
+    }
+
+    .brand-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand-link:hover {
+      color: var(--link);
+    }
+
+    @media (max-width: 700px) {
+      main {
+        width: min(100% - 1rem, 960px);
+        padding: 1rem 0;
+      }
+
+      .hero {
+        padding: 2rem 1.25rem 1rem;
+      }
+
+      .table-wrap {
+        padding: 0 0.75rem 0.75rem;
+      }
+
+      table,
+      thead,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      table {
+        border: 0;
+        background: transparent;
+      }
+
+      tr {
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      td {
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      td:last-child {
+        border-bottom: 0;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 0.35rem;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      td:first-child {
+        white-space: normal;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .shell {
+        animation: fade-in 500ms ease-out;
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="shell">
+      <div class="hero">
+        <p class="eyebrow">TuringLang</p>
+        <h1><a class="brand-link" href="https://github.com/TuringLang/">TuringLang</a> deprecated packages</h1>
+        <p class="intro">
+          This page lists deprecated packages from the TuringLang organization and points to their published documentation or replacement guidance.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Link</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Package">TuringBenchmarking</td>
+              <td data-label="Link" class="mono">
+                <a href="https://turinglang.org/Deprecated/TuringBenchmarking/">turinglang.org/Deprecated/TuringBenchmarking/</a>
+              </td>
+              <td data-label="Notes">Deprecated package.</td>
+            </tr>
+            <tr>
+              <td data-label="Package">TuringCallbacks</td>
+              <td data-label="Link" class="mono">
+                <a href="https://turinglang.org/Deprecated/TuringCallbacks/">turinglang.org/Deprecated/TuringCallbacks/</a>
+              </td>
+              <td data-label="Notes">
+                Callbacks were upstreamed to AbstractMCMC as an extension. See
+                <a href="https://turinglang.org/AbstractMCMC.jl/stable/callbacks/">the AbstractMCMC callbacks documentation</a>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
