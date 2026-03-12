@@ -11,8 +11,8 @@ These packages have either:
 | Package | Status | Documentation | Prerequisite |
 |:--------|:-------|:---------------|:------|
 | `AdvancedPS.jl` | ⬜ Planned | *(pending)* | Need to upstream AdvancedPS to Turing.jl |
-| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringBenchmarking/) | NIL |
-| `TuringCallbacks.jl` | ⬜ Planned | *(pending)* | Need to upstream callbacks to AbstractMCMC as an extension |
+| `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringBenchmarking/) | Deprecated package |
+| `TuringCallbacks.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringCallbacks/) | Callbacks were upstreamed to AbstractMCMC as an extension. See the [AbstractMCMC callbacks documentation.](https://turinglang.org/AbstractMCMC.jl/stable/callbacks/) |
 | `ParetoSmooth.jl` | ⬜ Planned | *(pending)* | https://github.com/TuringLang/Turing.jl/issues/2534 |
 | `DistributionsAD.jl` | ⬜ Planned | *(pending)* |  https://github.com/TuringLang/DistributionsAD.jl/issues/282 |
 
