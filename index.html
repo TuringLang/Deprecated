@@ -4,206 +4,256 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TuringLang Deprecated Packages</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #f4f1ea;
-      --panel: rgba(255, 255, 255, 0.84);
-      --border: rgba(29, 39, 51, 0.12);
-      --text: #18212c;
-      --muted: #5f6b79;
-      --link: #0f5c4d;
-      --shadow: 0 20px 60px rgba(31, 43, 56, 0.08);
-      --radius: 24px;
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: #f4f1ea;
     }
 
-    * {
+    .ext-navigation a,
+    .ext-navigation a:hover,
+    .ext-navigation a:focus,
+    .ext-navigation a:active {
+      text-decoration: none;
+    }
+
+    .ext-navigation,
+    .ext-navigation * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
+    .ext-navigation {
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .ext-navigation .ext-navbar-icons a,
+    .ext-navigation .ext-menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ext-navigation .ext-menu-toggle {
+      display: none;
+    }
+
+    .ext-navigation .ext-menu-toggle i,
+    .ext-navigation .ext-navbar-icons i {
+      line-height: 1;
+    }
+
+    .ext-dropdown ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    @media (max-width: 768px) {
+      .ext-navigation .ext-menu-toggle {
+        display: inline-flex;
+      }
+    }
+
+    .landing-page,
+    .landing-page * {
+      box-sizing: border-box;
+    }
+
+    .landing-page {
+      --lp-bg: #f4f1ea;
+      --lp-panel: rgba(255, 255, 255, 0.84);
+      --lp-border: rgba(29, 39, 51, 0.12);
+      --lp-text: #18212c;
+      --lp-muted: #5f6b79;
+      --lp-link: #0f5c4d;
+      --lp-shadow: 0 20px 60px rgba(31, 43, 56, 0.08);
+      --lp-radius: 24px;
+      width: 100%;
       min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
       line-height: 1.6;
-      color: var(--text);
+      color: var(--lp-text);
       background:
         radial-gradient(circle at top left, rgba(16, 92, 77, 0.12), transparent 28rem),
         radial-gradient(circle at bottom right, rgba(196, 132, 73, 0.12), transparent 24rem),
-        var(--bg);
+        var(--lp-bg);
     }
 
-    main {
+    .landing-page main {
       width: min(960px, calc(100% - 2rem));
       margin: 0 auto;
-      padding: 4rem 0;
+      padding: calc(var(--navbar-height, 0px) + 2rem) 0 4rem;
     }
 
-    .shell {
+    .landing-page .shell {
       overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: var(--shadow);
+      border: 1px solid var(--lp-border);
+      border-radius: var(--lp-radius);
+      background: var(--lp-panel);
+      box-shadow: var(--lp-shadow);
       -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
     }
 
-    .hero {
+    .landing-page .hero {
       padding: 3rem 2rem 1.5rem;
     }
 
-    .eyebrow {
+    .landing-page .eyebrow {
       margin: 0 0 0.75rem;
       font-family: "Segoe UI", sans-serif;
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--link);
+      color: var(--lp-link);
     }
 
-    h1 {
+    .landing-page h1 {
       margin: 0;
       font-size: clamp(2rem, 5vw, 3.5rem);
       line-height: 1.05;
       letter-spacing: -0.03em;
     }
 
-    .intro {
+    .landing-page .intro {
       max-width: 42rem;
       margin: 1rem 0 0;
-      color: var(--muted);
+      color: var(--lp-muted);
       font-size: 1.05rem;
     }
 
-    .table-wrap {
+    .landing-page .table-wrap {
       padding: 0 1rem 1rem;
     }
 
-    .footer {
+    .landing-page .footer {
       padding: 0 2rem 2rem;
-      color: var(--muted);
+      color: var(--lp-muted);
       font-size: 0.95rem;
     }
 
-    table {
+    .landing-page table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      border: 1px solid var(--border);
+      border: 1px solid var(--lp-border);
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.78);
       overflow: hidden;
     }
 
-    th,
-    td {
+    .landing-page th,
+    .landing-page td {
       padding: 1rem 1.1rem;
       text-align: left;
       vertical-align: top;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--lp-border);
     }
 
-    th {
+    .landing-page th {
       background: rgba(24, 33, 44, 0.04);
       font-family: "Segoe UI", sans-serif;
       font-size: 0.8rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--lp-muted);
     }
 
-    tr:last-child td {
+    .landing-page tr:last-child td {
       border-bottom: 0;
     }
 
-    td:first-child {
+    .landing-page td:first-child {
       white-space: nowrap;
       font-weight: 700;
     }
 
-    a {
-      color: var(--link);
+    .landing-page a {
+      color: var(--lp-link);
       text-decoration-thickness: 0.08em;
       text-underline-offset: 0.16em;
     }
 
-    a:hover {
+    .landing-page a:hover {
       text-decoration-thickness: 0.12em;
-      color: var(--muted);
+      color: var(--lp-muted);
       text-decoration: none;
     }
 
-    .mono {
+    .landing-page .mono {
       font-family: "Consolas", "Courier New", monospace;
       font-size: 0.94rem;
       word-break: break-word;
     }
 
-    .brand-link {
-      color: var(--link);
+    .landing-page .brand-link {
+      color: var(--lp-link);
       text-decoration: none;
     }
-    
-    .brand-link:hover {
-      color: var(--muted);
+
+    .landing-page .brand-link:hover {
+      color: var(--lp-muted);
     }
 
     @media (max-width: 700px) {
-      main {
+      .landing-page main {
         width: min(100% - 1rem, 960px);
-        padding: 1rem 0;
+        padding: calc(var(--navbar-height, 0px) + 1rem) 0 1rem;
       }
 
-      .hero {
+      .landing-page .hero {
         padding: 2rem 1.25rem 1rem;
       }
 
-      .table-wrap {
+      .landing-page .table-wrap {
         padding: 0 0.75rem 0.75rem;
       }
 
-      .footer {
+      .landing-page .footer {
         padding: 0 1.25rem 1.5rem;
       }
 
-      table,
-      thead,
-      tbody,
-      tr,
-      th,
-      td {
+      .landing-page table,
+      .landing-page thead,
+      .landing-page tbody,
+      .landing-page tr,
+      .landing-page th,
+      .landing-page td {
         display: block;
       }
 
-      thead {
+      .landing-page thead {
         display: none;
       }
 
-      table {
+      .landing-page table {
         border: 0;
         background: transparent;
       }
 
-      tr {
+      .landing-page tr {
         margin-bottom: 0.75rem;
         overflow: hidden;
-        border: 1px solid var(--border);
+        border: 1px solid var(--lp-border);
         border-radius: 16px;
         background: rgba(255, 255, 255, 0.86);
       }
 
-      td {
+      .landing-page td {
         padding: 0.9rem 1rem;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--lp-border);
       }
 
-      td:last-child {
+      .landing-page td:last-child {
         border-bottom: 0;
       }
 
-      td::before {
+      .landing-page td::before {
         content: attr(data-label);
         display: block;
         margin-bottom: 0.35rem;
@@ -212,16 +262,16 @@
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--muted);
+        color: var(--lp-muted);
       }
 
-      td:first-child {
+      .landing-page td:first-child {
         white-space: normal;
       }
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      .shell {
+      .landing-page .shell {
         animation: fade-in 500ms ease-out;
       }
     }
@@ -240,50 +290,52 @@
   </style>
 </head>
 <body>
-  <main>
-    <section class="shell">
-      <div class="hero">
-        <p class="eyebrow">The Turing Language</p>
-        <h1><a class="brand-link" href="https://github.com/TuringLang/">TuringLang</a> deprecated packages</h1>
-        <p class="intro">
-          This page lists deprecated packages from the TuringLang organization and points to their published documentation or replacement guidance.
+  <div class="landing-page">
+    <main>
+      <section class="shell">
+        <div class="hero">
+          <p class="eyebrow">The Turing Language</p>
+          <h1><a class="brand-link" href="https://github.com/TuringLang/">TuringLang</a> deprecated packages</h1>
+          <p class="intro">
+            This page lists deprecated packages from the TuringLang organization and points to their published documentation or replacement guidance.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Link</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Package">TuringBenchmarking</td>
+                <td data-label="Link" class="mono">
+                  <a href="https://turinglang.org/Deprecated/TuringBenchmarking/">turinglang.org/Deprecated/TuringBenchmarking/</a>
+                </td>
+                <td data-label="Notes">Deprecated package.</td>
+              </tr>
+              <tr>
+                <td data-label="Package">TuringCallbacks</td>
+                <td data-label="Link" class="mono">
+                  <a href="https://turinglang.org/Deprecated/TuringCallbacks/">turinglang.org/Deprecated/TuringCallbacks/</a>
+                </td>
+                <td data-label="Notes">
+                  Callbacks were upstreamed to AbstractMCMC as an extension. See
+                  <a href="https://turinglang.org/AbstractMCMC.jl/stable/callbacks/">the AbstractMCMC callbacks documentation</a>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footer">
+          This site is open source.
+          <a href="https://github.com/TuringLang/Deprecated/edit/gh-pages/index.html">Improve this page</a>.
         </p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Package</th>
-              <th>Link</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Package">TuringBenchmarking</td>
-              <td data-label="Link" class="mono">
-                <a href="https://turinglang.org/Deprecated/TuringBenchmarking/">turinglang.org/Deprecated/TuringBenchmarking/</a>
-              </td>
-              <td data-label="Notes">Deprecated package.</td>
-            </tr>
-            <tr>
-              <td data-label="Package">TuringCallbacks</td>
-              <td data-label="Link" class="mono">
-                <a href="https://turinglang.org/Deprecated/TuringCallbacks/">turinglang.org/Deprecated/TuringCallbacks/</a>
-              </td>
-              <td data-label="Notes">
-                Callbacks were upstreamed to AbstractMCMC as an extension. See
-                <a href="https://turinglang.org/AbstractMCMC.jl/stable/callbacks/">the AbstractMCMC callbacks documentation</a>.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="footer">
-        This site is open source.
-        <a href="https://github.com/TuringLang/Deprecated/edit/gh-pages/index.html">Improve this page</a>.
-      </p>
-    </section>
-  </main>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
