@@ -14,7 +14,7 @@ These packages have either:
 | `TuringBenchmarking.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringBenchmarking/) | Deprecated package |
 | `TuringCallbacks.jl` | ✅ Merged | [Documentation](https://turinglang.org/Deprecated/TuringCallbacks/) | Callbacks were upstreamed to AbstractMCMC as an extension. See the [AbstractMCMC callbacks documentation.](https://turinglang.org/AbstractMCMC.jl/stable/callbacks/) |
 | `ParetoSmooth.jl` | ⬜ Planned | *(pending)* | https://github.com/TuringLang/Turing.jl/issues/2534 |
-| `DistributionsAD.jl` | ✅  | NIL |  https://github.com/JuliaDiff/DistributionsAD.jl/issues/282 |
+| `DistributionsAD.jl` | ✅  | [Repo](https://github.com/JuliaDiff/DistributionsAD.jl/issues/282) |  None |
 
 
 ## Guide: Adding Packages While Preserving Commit History
